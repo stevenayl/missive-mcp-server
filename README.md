@@ -80,17 +80,54 @@ Parameters:
 - `conversation_id` (optional): ID of existing conversation to add message to
 - `team_id` (optional): Team ID to link the conversation to
 
+## Usage with N8N
+
+To use this MCP server with N8N:
+
+1. Clone and set up the server:
+```bash
+git clone https://github.com/stevenayl/missive-mcp-server.git
+cd missive-mcp-server
+npm install
+npm run build
+```
+
+2. Set your Missive API token:
+```bash
+export MISSIVE_API_TOKEN="your-missive-api-token-here"
+```
+
+3. Run the HTTP server:
+```bash
+npm run http
+# Or for production: npm run http:prod
+```
+
+4. In N8N MCP Client node:
+   - **SSE Endpoint**: `http://localhost:3000/sse`
+   - **Authentication**: Bearer Auth
+   - **Credential for Bearer Auth**: Leave empty (the API token is handled server-side)
+   - **Tools to Include**: All
+
+5. The AI Agent can now use the Missive tools without needing the API token directly.
+
 ## Development
 
 ```bash
 # Run in development mode
 npm run dev
 
+# Run HTTP server in development
+npm run http
+
 # Build for production
 npm run build
 
 # Start production server
 npm start
+
+# Start HTTP production server
+npm run http:prod
 ```
 
 ## License
